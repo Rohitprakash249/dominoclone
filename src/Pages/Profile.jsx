@@ -30,6 +30,7 @@ export default function Profile(props) {
               nameOflink={"My Orders"}
             />
             <ProfileLink
+              to="/address"
               imageLink="/profile/location.png"
               nameOflink={"My Addresses"}
             />

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Drawer from "./Drawer";
+import { useNavigate } from "react-router-dom";
 export default function UserNavbar(props) {
   const [location, setLocation] = useState("");
+  const navigate = useNavigate();
 
   return (
     <>
@@ -33,7 +35,10 @@ export default function UserNavbar(props) {
             <p>for seamless delivery</p>
           </div>
         </div>
-        <button className=" border px-2 font-bold py-[7px] rounded-lg text-xs ">
+        <button
+          onClick={() => navigate("/UpdateCurrentAddress")}
+          className=" border px-2 font-bold py-[7px] rounded-lg text-xs "
+        >
           Detect location
         </button>
       </div>

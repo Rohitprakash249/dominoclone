@@ -4,6 +4,7 @@ const customerInitialState = {
   email: "Rohit@Rohit.com",
 
   addresses: [],
+  selectedAddress: {},
   lastSelectedLocation: {
     addressFirstLine: "",
     addressSecondLine: "",

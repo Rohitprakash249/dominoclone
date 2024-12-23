@@ -3,7 +3,9 @@ import DrawerNavigation from "../../UiComponents/DrawerNavigation";
 
 const data = [
   { name: "Deals & Offers", to: "/deals" },
-  // { name: "1 + 1 Offer", to: "/dealsAndOffers" },
+  { name: "Order History", to: "/orders" },
+  { name: "Addresses", to: "/address" },
+  { name: "Update Current Location", to: "/UpdateCurrentAddress" },
   // { name: "Track Current Order", to: "/trackOrder" },
   // { name: "Order History", to: "/orderHistory" },
   // { name: "Terms & Conditions", to: "/termsAndCondtions" },

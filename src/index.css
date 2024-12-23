@@ -21,3 +21,7 @@ code {
 .top10 {
   background-image: url(https://i.imgur.com/wYZreg6.png);
 }
+.addressFooter {
+  box-shadow: 0 10px 15px 12px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
