@@ -3,8 +3,11 @@ import { Link } from "react-router";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Drawer from "./Drawer";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function UserNavbar(props) {
   const [location, setLocation] = useState("");
+  const currentAddress = useSelector((store) => store.customer.selectedAddress);
+  console.log(currentAddress);
   const navigate = useNavigate();
 
   return (
@@ -14,11 +17,16 @@ export default function UserNavbar(props) {
           <div className="flex ">
             <LocationOnIcon className="text-red-500 " fontSize="inherit" />
             <p className="text-red-600 flex text-md font-bold mx-1">
-              No Location
+              {currentAddress && currentAddress.addressType}
+              {!currentAddress && "No Location Selected"}
             </p>
           </div>
           <div className="text-[#898989]">
-            <p className="text-sm ">Exact Location Required</p>
+            <p className="text-sm ">
+              {currentAddress && currentAddress.flatNo}{" "}
+              {currentAddress && currentAddress.addressInfo}
+              {!currentAddress && "Exact Location Required"}
+            </p>
           </div>
         </div>
         <Drawer />

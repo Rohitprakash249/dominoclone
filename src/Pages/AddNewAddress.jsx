@@ -33,18 +33,6 @@ export default function AddNewAddress(props) {
       console.log("Geolocation is not supported by this browser.");
     }
   }, []);
-  // console.log(address);
-  // function addAddress() {
-  //   if (!mapPosition || address) return;
-  //   if (!flatOrBuilding) return;
-  //   const data = {
-  //     locationData: mapPosition,
-  //     addressType: typeAddress,
-  //     flatNo: flatOrBuilding,
-  //     Address: address,
-  //   };
-  //   console.log(data);
-  // }
 
   return (
     <>

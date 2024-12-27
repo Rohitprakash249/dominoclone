@@ -12,9 +12,8 @@ export default function CartButton({ cartQty }) {
               {cartQty}
             </p>
             <ShoppingCartIcon sx={{ color: "white" }} />
-            <Link to="/cart">
-              <p className="px-2">View Cart </p>
-            </Link>
+
+            <p className="px-2">View Cart </p>
           </div>
         </div>
       </Link>

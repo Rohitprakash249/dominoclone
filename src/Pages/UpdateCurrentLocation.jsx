@@ -6,14 +6,14 @@ export default function UpdateCurrentLocation(props) {
   const [updatingLocation, setUpdatingLocation] = useState(false);
   function setCurrentLocation() {
     setUpdatingLocation(true);
-    console.log(mapPosition);
+
     setTimeout(function () {
       setUpdatingLocation(false);
     }, 1000);
   }
   return (
     <>
-      <div className="h-svh w-[100%]">
+      <div className="h-svh w-[100%] ">
         <UpdateLocationMap
           mapPosition={mapPosition}
           toSetMapPosition={SetMapPosition}
@@ -33,11 +33,4 @@ export default function UpdateCurrentLocation(props) {
       </div>
     </>
   );
-}
-
-{
-  /* <button
-onClick={setCurrentLocation}
-className="bg-[#e12a47] px-4 rounded-md py-2 w-full text-white font-semibold"
-> */
 }

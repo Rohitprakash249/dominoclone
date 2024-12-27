@@ -1,13 +1,65 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Address from "../../../Pages/Address";
 
 export default function CartCheckout(props) {
+  const navigate = useNavigate();
   const [subTotal, setSubTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
   const cartData = useSelector((store) => store.cartData.cart);
   const couponData = useSelector((store) => store.cartData.coupon);
+  const cartInfo = useSelector((store) => store.cartData);
+  const nameOfUser = useSelector((store) => store.customer.name);
+  const contactNo = useSelector((store) => store.customer.contactNo);
+  const currentAddress = useSelector((store) => store.customer.selectedAddress);
+  console.log(contactNo);
+  // console.log(cartInfo);
+
+  async function placeOrder() {
+    const items = cartInfo.cart;
+    const coupon = couponData.couponCode;
+    let couponApplied = coupon;
+    // const coupon = couponData.couponCode
+    const customerName = nameOfUser;
+
+    if (!currentAddress) {
+      navigate("/address");
+    }
+    if (!coupon) {
+      couponApplied = "no Coupon Applied";
+    }
+    if (coupon) {
+      couponApplied = coupon;
+    }
+
+    const finalData = {
+      customerName: customerName,
+      contactNo: contactNo,
+      customerAddress: currentAddress,
+      itemsOrder: items,
+      couponApplied: couponApplied,
+      subTotal: subTotal,
+      grandTotal: grandTotal,
+    };
+
+    if (currentAddress) {
+      console.log(finalData);
+      const res = await fetch("http://localhost:4000/api/createOrder", {
+        method: "POST", // PUT method for updating resources
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(finalData), // Send updated data as JSON
+      });
+      const data = await res.json();
+      console.log(data);
+    }
+  }
+
   useEffect(
     function () {
       let subTotal = cartData.reduce((sum, obj) => sum + obj.totalValue, 0);
@@ -22,8 +74,6 @@ export default function CartCheckout(props) {
         setGrandTotal(subTotal + calculateTax - couponData.discount);
         setDiscount(couponData.discount);
       }
-
-      console.log(subTotal);
     },
     [cartData, couponData]
   );
@@ -59,7 +109,10 @@ export default function CartCheckout(props) {
             </div>
           </div>
 
-          <button className="uppercase md:font-bold text-white bg-[#82bb37] text-md font-semibold px-1 rounded-sm py-1 md:py-[5px]">
+          <button
+            onClick={placeOrder}
+            className="uppercase md:font-bold text-white bg-[#82bb37] text-md font-semibold px-1 rounded-sm py-1 md:py-[5px]"
+          >
             place order
           </button>
         </div>

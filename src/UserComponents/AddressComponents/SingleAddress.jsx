@@ -23,8 +23,8 @@ export default function SingleAddress({ addressInfo }) {
           </div>
 
           <div className="px-1 text-xs md:text-sm flex flex-col gap-1">
-            <p className="font-semibold py-1 ">home</p>
-            <p>555, gurugram Street,bla bla sector 9, Gurugram, Haryana,</p>
+            <p className="font-semibold py-1 ">{addressInfo.addressType}</p>
+            <p>{addressInfo.addressInfo}</p>
           </div>
         </div>
         <div className="flex text-[#005491] border-t-[1px] px-8 py-2 gap-4 font-bold text-xs">

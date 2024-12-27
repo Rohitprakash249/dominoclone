@@ -4,18 +4,23 @@ import ItemsOrdered from "./SingleOrderComponents/ItemsOrdered";
 import OrderTotalAndReorderButton from "./SingleOrderComponents/OrderTotalAndReorder Button";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function SingleOrder(props) {
-  const navigate = useNavigate();
+export default function SingleOrder({ orderInfo }) {
+  const itemsOrdered = orderInfo.itemsOrdered;
 
+  const navigate = useNavigate();
+  console.log(orderInfo);
   return (
     <>
       <div
         onClick={() => navigate("/order/:1578")}
         className="rounded-md w-full shadow-lg sm:w-[48%] lg:w-[32%]  border"
       >
-        <DeliveryTypeTimeStatus />
-        <ItemsOrdered />
-        <OrderTotalAndReorderButton />
+        <DeliveryTypeTimeStatus deliveryStatus={orderInfo.deliveryStatus} />
+        {itemsOrdered.map((item) => (
+          <ItemsOrdered item={item} />
+        ))}
+
+        <OrderTotalAndReorderButton orderTotal={orderInfo.grandTotal} />
       </div>
     </>
   );

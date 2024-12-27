@@ -14,24 +14,26 @@ export default function UpdateLocationMap({ mapPosition, toSetMapPosition }) {
   console.log(mapPosition);
   return (
     // <div className="h-svh w-[100%]">
-    <MapContainer
-      className="h-[90%]"
-      center={[28.4595, 77.0266]}
-      zoom={14}
-      scrollWheelZoom={true}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+    <>
+      <MapContainer
+        className="h-[90%]"
+        center={[28.4595, 77.0266]}
+        zoom={14}
+        scrollWheelZoom={true}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-      <Marker position={mapPosition}>
-        <Popup>You are here!.</Popup>
-      </Marker>
+        <Marker position={mapPosition}>
+          <Popup>You are here!.</Popup>
+        </Marker>
 
-      <ChangeCenter position={mapPosition} />
-      <DetectClick toSetMapPosition={toSetMapPosition} />
-    </MapContainer>
+        <ChangeCenter position={mapPosition} />
+        <DetectClick toSetMapPosition={toSetMapPosition} />
+      </MapContainer>
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DeliveryTypeTimeStatus(props) {
+export default function DeliveryTypeTimeStatus({ deliveryStatus }) {
   return (
     <>
       <div className="flex justify-between py-3 px-3">
@@ -10,7 +10,7 @@ export default function DeliveryTypeTimeStatus(props) {
           <p className="text-xs text-[#666666]"> 16 Oct 2024 20:14</p>
         </div>
         <p className="uppercase border h-[1.4rem] text-sm font-semibold px-1 rounded-md border-[#ccc5a8] bg-[#f0ffe4] text-[#008115]">
-          Delivered
+          {deliveryStatus}
         </p>
       </div>
     </>

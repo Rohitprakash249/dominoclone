@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 export default function SaveAddressAsButton({
   setTypeAddress,
   typeAddress,
-
   address,
   flatOrBuilding,
   mapPosition,
@@ -16,12 +15,15 @@ export default function SaveAddressAsButton({
   const [ifAddressSaved, setAddressSaved] = useState(false);
   const dispatch = useDispatch();
   const addressData = useSelector((store) => store.customer.addresses);
+  const currentAddress = useSelector((store) => store.customer.selectedAddress);
+
   // console.log(addressData);
   function setWhichButtonIsClicked(item) {
     setClicked(item);
   }
+  // console.log(currentAddress);
 
-  function blabla() {
+  async function blabla() {
     if (!mapPosition || !address) return;
     if (!flatOrBuilding) return;
     const data = {
@@ -32,9 +34,37 @@ export default function SaveAddressAsButton({
     };
     const newData = [...addressData, data];
 
-    dispatch({ type: "customer/updateAddress", payload: newData });
+    const res = await fetch("http://localhost:4000/api/updateAddress", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newData), // Send updated data as JSON
+    });
+    const response = await res.json();
+
+    if ((await response.message) === "success") {
+      dispatch({ type: "customer/updateAddress", payload: newData });
+    }
+    if (Object.entries(currentAddress).length === 0) {
+      const res = await fetch("http://localhost:4000/api/setSelectedAddress", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data), // Send updated data as JSON
+      });
+      const response = await res.json();
+      console.log(response);
+    } else {
+      console.log("Object is not empty");
+    }
+    // if (!currentAddress) {
+    //   dispatch({ type: "customer/lastSelectedAddress", payload: data });
+    // }
     setAddressSaved(true);
-    console.log(addressData);
 
     setTimeout(function () {
       setAddressSaved(false);
@@ -92,42 +122,3 @@ export default function SaveAddressAsButton({
     </>
   );
 }
-// import React, { useState } from "react";
-// import ModeIcon from "@mui/icons-material/Mode";
-// export default function SaveAddressAsButton(props) {
-//   const [clicked, setClicked] = useState();
-//   function setWhichButtonIsClicked(item) {
-//     setClicked(item);
-//   }
-//   return (
-//     <>
-//       <div>
-//         <p className="text-[#7a7a7a] mb-1">Save this address as</p>
-//         <div className="flex text-[0.8rem] gap-1">
-//           <p
-//             onClick={() => setWhichButtonIsClicked("Home")}
-//             className="border border-[#dddddd] text-[#2e2e2e] px-2 py-[0.4rem] rounded-md"
-//           >
-//             Home
-//           </p>
-//           <p
-//             onClick={() => setWhichButtonIsClicked("Office")}
-//             className="border border-[#dddddd] text-[#2e2e2e] px-2 py-[0.4rem] rounded-md"
-//           >
-//             Office
-//           </p>
-//           <p
-//             onClick={() => setWhichButtonIsClicked("Other")}
-//             className="border border-[#dddddd] flex gap-2 text-[#2e2e2e] px-2 py-[0.4rem] rounded-md"
-//           >
-//             Other
-//             <ModeIcon fontSize="small" />
-//           </p>
-//         </div>
-//       </div>
-//       <button className="text-white w-full bg-[#a6a6a6] py-[0.4rem] text-md font-bold mb-2 rounded-md">
-//         Save Address
-//       </button>
-//     </>
-//   );
-// }
