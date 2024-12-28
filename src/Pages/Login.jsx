@@ -64,6 +64,9 @@ export default function Login(props) {
             >
               Login
             </button>
+            <p onClick={() => navigate("/signup")} className="">
+              Don't have an account? sign up
+            </p>
           </div>
         </div>
       </div>

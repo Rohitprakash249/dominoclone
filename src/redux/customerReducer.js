@@ -1,7 +1,7 @@
 const customerInitialState = {
-  name: "Rohit",
-  contactNo: "123456789",
-  email: "Rohit@Rohit.com",
+  name: "",
+  contactNo: "",
+  email: "",
 
   addresses: [],
   selectedAddress: {},

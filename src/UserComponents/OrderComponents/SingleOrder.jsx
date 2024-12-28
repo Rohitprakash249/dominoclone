@@ -8,11 +8,11 @@ export default function SingleOrder({ orderInfo }) {
   const itemsOrdered = orderInfo.itemsOrdered;
 
   const navigate = useNavigate();
-  console.log(orderInfo);
+  // console.log(orderInfo);
   return (
     <>
       <div
-        onClick={() => navigate("/order/:1578")}
+        // onClick={() => navigate("/order/:1578")}
         className="rounded-md w-full shadow-lg sm:w-[48%] lg:w-[32%]  border"
       >
         <DeliveryTypeTimeStatus deliveryStatus={orderInfo.deliveryStatus} />
@@ -20,7 +20,10 @@ export default function SingleOrder({ orderInfo }) {
           <ItemsOrdered item={item} />
         ))}
 
-        <OrderTotalAndReorderButton orderTotal={orderInfo.grandTotal} />
+        <OrderTotalAndReorderButton
+          orderTotal={orderInfo.grandTotal}
+          itemsOrdered={orderInfo.itemsOrdered}
+        />
       </div>
     </>
   );

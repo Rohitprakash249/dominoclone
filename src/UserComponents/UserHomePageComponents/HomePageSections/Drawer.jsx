@@ -40,12 +40,23 @@ export default function TemporaryDrawer() {
             <p className="text-[#2e2e2e]">{contactNoOfUser}</p>
           </div>
         </div>
-        <button
-          onClick={() => navigate("/myprofile")}
-          className="text-xs text-[#005491] font-bold mx-3"
-        >
-          Edit
-        </button>
+        {nameOfUser && (
+          <button
+            onClick={() => navigate("/myprofile")}
+            className="text-xs text-[#005491] font-bold mx-3"
+          >
+            Edit
+          </button>
+        )}
+
+        {!nameOfUser && (
+          <button
+            onClick={() => navigate("/login")}
+            className="text-xs text-[#005491] font-bold mx-3"
+          >
+            LOGIN
+          </button>
+        )}
       </div>
       <AllDrawerNavigation />
     </Box>

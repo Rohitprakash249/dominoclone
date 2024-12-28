@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useDispatch } from "react-redux";
 export default function SingleAddress({ addressInfo }) {
   console.log(addressInfo);
+  const [updatingAddress, setUpdatingAddress] = useState(false);
+  const dispatch = useDispatch();
+  function setSelectedAddress() {
+    setUpdatingAddress(true);
+    dispatch({ type: "customer/selectedAddress", payload: addressInfo });
+    setTimeout(function updating() {
+      setUpdatingAddress(false);
+    }, 1000);
+  }
   return (
     <>
       <div className="rounded-lg shadow-md shadow-gray-200 border-[1px] w-full sm:w-[50%] md:w-[32%] ">
@@ -31,6 +41,14 @@ export default function SingleAddress({ addressInfo }) {
           <button>Edit</button>
           <button className="border-l-[1px] border-black px-[14px]">
             Delete
+          </button>
+          <button
+            onClick={setSelectedAddress}
+            className={`border-l-[1px] border-black px-[14px] duration-1000 ${
+              updatingAddress === true && `text-red-500`
+            }`}
+          >
+            Delivery to this Address
           </button>
         </div>
       </div>

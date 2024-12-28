@@ -11,8 +11,9 @@ export default function Orders(props) {
         credentials: "include",
       });
       const data = await res.json();
-
+      // if (data.length >= 0) {
       setOrders(data.orders);
+      // }
     }
     getAllOrders();
   }, []);

@@ -56,6 +56,9 @@ export default function CartCheckout(props) {
         body: JSON.stringify(finalData), // Send updated data as JSON
       });
       const data = await res.json();
+      if (data.message === "success") {
+        navigate("/orders");
+      }
       console.log(data);
     }
   }

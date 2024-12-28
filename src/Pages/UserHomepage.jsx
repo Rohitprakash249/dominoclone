@@ -21,16 +21,19 @@ export default function UserHomepage(props) {
         },
       });
       const data = await res.json();
-
-      dispatch({ type: "customer/updateAddress", payload: data.addresses });
-      dispatch({ type: "customer/updateName", payload: data.name });
-      dispatch({ type: "customer/updateContactNo", payload: data.contactNo });
-      dispatch({ type: "customer/updateEmail", payload: data.email });
-      dispatch({ type: "cart/addItem", payload: data.cartItems });
-      dispatch({
-        type: "customer/selectedAddress",
-        payload: data.selectedAddress,
-      });
+      if (data.name) {
+        dispatch({ type: "customer/updateAddress", payload: data.addresses });
+        dispatch({ type: "customer/updateName", payload: data.name });
+        dispatch({ type: "customer/updateContactNo", payload: data.contactNo });
+        dispatch({ type: "customer/updateEmail", payload: data.email });
+        dispatch({ type: "cart/addItem", payload: data.cartItems });
+        if (data.selectedAddress) {
+          dispatch({
+            type: "customer/selectedAddress",
+            payload: data.selectedAddress,
+          });
+        }
+      }
     }
     getUserDetails();
   });

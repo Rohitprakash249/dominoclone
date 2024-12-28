@@ -3,10 +3,22 @@ import ProfileNavbar from "../UserComponents/ProfileComponents/ProfileNavbar";
 import Name from "../UserComponents/ProfileComponents/Name";
 import ProfileLink from "../UserComponents/ProfileComponents/ProfileLink";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile(props) {
   const data = useSelector((store) => store.customer);
   // console.log(data);
+  const navigate = useNavigate();
+  async function logout() {
+    const res = await fetch(`http://localhost:4000/api/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+    const data = res.json();
+    if (data.message === "logout success") {
+      navigate("/login");
+    }
+  }
   return (
     <>
       <ProfileNavbar />
@@ -37,10 +49,12 @@ export default function Profile(props) {
               imageLink="/profile/location.png"
               nameOflink={"My Addresses"}
             />
-            <ProfileLink
-              imageLink="/profile/logout.png"
-              nameOflink={"Logout"}
-            />
+            <div onClick={logout}>
+              <ProfileLink
+                imageLink="/profile/logout.png"
+                nameOflink={"Logout"}
+              />
+            </div>
           </div>
         </div>
       </div>

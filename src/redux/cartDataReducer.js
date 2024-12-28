@@ -18,6 +18,8 @@ export default function cartDataReducer(state = cartInitialState, action) {
       return { ...state, coupon: action.payload };
     case "cart/deleteCoupon":
       return { ...state, coupon: "noCouponApplied" };
+    case "cart/setQuantity":
+      return { ...state, cartQty: action.payload };
     default:
       return state;
   }
